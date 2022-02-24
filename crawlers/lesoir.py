@@ -1,29 +1,10 @@
-from dataclasses import dataclass, field
 import re
+
 import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 
-@dataclass
-class Headline:
-    title: str
-    category: str
-    url: str
-    internal_url: str
-    paywall: bool | None
-
-
-@dataclass
-class Article:
-    title: str
-    summary: str
-    img: str
-    url: str
-    paragraphs: [str]
-    published_on: str = None
-    updated_on: str = None
-    see_also: [str] = field(default_factory=list)
-
+from models import Headline, Article
 
 base_url = "https://lesoir.be"
 
@@ -75,7 +56,7 @@ def fetch_headlines() -> [Headline]:
     return articles
 
 
-def fetch_article(path: str):
+def fetch_article(path: str) -> Article:
     url = base_url + "/" + path
     html = requests.get(url, headers={"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}).text
     soup = BeautifulSoup(html, "html.parser")

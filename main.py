@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 
-from lesoir import fetch_headlines, Headline, fetch_article
+from crawlers.lesoir import fetch_headlines, Headline, fetch_article
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
