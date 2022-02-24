@@ -41,7 +41,6 @@ class LeSoir(Crawler):
         for panel_fragment in soup.find_all("r-mini-panel", id=re.compile("^panel")):
             try:
                 category = panel_fragment.select(".r-mini-panel--title")[0].attrs["data-label"]
-                print(f"    {category}")
                 articles_in_link_fragment = parse_panel_fragment(".r-article--link")
                 if len(articles_in_link_fragment) == 0:  # Panel "Opinions"
                     articles_in_link_fragment = parse_panel_fragment(".r-panel--link")
