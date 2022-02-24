@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
+    <body>
+        <div id="center">
+            {% include "newspaper_bar.html" %}
+            {% for entry in headlines_in_categories %}
+            <h2>{{entry[0]}}</h2>
+            <ul class="headline">
+                {% for headline in entry[1] %}
+                    <li>
+                        <a href="{{headline.internal_url}}">{{headline.title}}</a>
+                        {% if headline.paywall %}🔒{% endif %}
+                    </li>
+                {% endfor %}
+                </ul>
+            {% endfor %}
+        </div>
+    </body>
+</html>

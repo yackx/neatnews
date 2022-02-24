@@ -1,0 +1,8 @@
+# Web server
+fastapi
+uvicorn[standard]
+jinja2
+
+# News
+requests
+beautifulsoup4
