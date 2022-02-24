@@ -1,8 +1,8 @@
 # Web server
-fastapi
-uvicorn[standard]
-jinja2
+fastapi==0.74.0
+uvicorn[standard]==0.17.5
+Jinja2==3.0.3
 
 # News
-requests
-beautifulsoup4
+requests==2.27.1
+beautifulsoup4==4.10.0
