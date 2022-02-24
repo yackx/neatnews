@@ -4,7 +4,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 
-from crawlers.lesoir import fetch_headlines, Headline, fetch_article
+from crawlers.lesoir import LeSoir
+from models import Headline
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -26,7 +27,8 @@ def newspapers() -> {str, str}:
 
 @app.get("/{newspaper}", response_class=HTMLResponse, name="newspaper")
 async def headlines(request: Request):
-    headlines = fetch_headlines()
+    crawler = LeSoir()
+    headlines = crawler.fetch_headlines()
     headlines_in_categories = split_headlines_in_categories(headlines)
     return templates.TemplateResponse("index.html", {
         "request": request,
@@ -37,7 +39,8 @@ async def headlines(request: Request):
 
 @app.get("/{newspaper}/{path:path}", response_class=HTMLResponse)
 async def article(request: Request, path: str):
-    article = fetch_article(path)
+    crawler = LeSoir()
+    article = crawler.fetch_article(path)
     return templates.TemplateResponse("article.html", {
         "request": request,
         "article": article,
