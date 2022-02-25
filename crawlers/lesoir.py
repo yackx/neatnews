@@ -7,8 +7,6 @@ from bs4.element import Comment
 from crawlers.crawler import Crawler
 from models import Headline, Article
 
-base_url = "https://lesoir.be"
-
 
 class LeSoir(Crawler):
     @staticmethod
@@ -19,6 +17,10 @@ class LeSoir(Crawler):
     def name() -> str:
         return "Le Soir"
 
+    @staticmethod
+    def base_url() -> str:
+        return "https://lesoir.be"
+
     def fetch_headlines(self) -> [Headline]:
 
         def parse_panel_fragment(selector):
@@ -27,14 +29,14 @@ class LeSoir(Crawler):
                 title = article_fragment.text.strip().replace("\n", " - ")
                 href = article_fragment.attrs["href"]
                 internal_url = f"lesoir{href}"
-                url = f"{base_url}{href}"
+                url = f"{self.base_url()}{href}"
                 paywall = len(article_fragment.select(".r-icon--lesoir")) > 0
                 article = Headline(title, str(category), url, internal_url, paywall)
                 articles_in_panel.append(article)
             return articles_in_panel
 
         articles = []
-        html = requests.get(base_url).text
+        html = requests.get(self.base_url()).text
         soup = BeautifulSoup(html, "html.parser")
         category = None
 
@@ -65,7 +67,7 @@ class LeSoir(Crawler):
         return articles
 
     def fetch_article(self, path: str) -> Article:
-        url = base_url + "/" + path
+        url = self.base_url() + "/" + path
         html = requests.get(url, headers={"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}).text
         soup = BeautifulSoup(html, "html.parser")
         title = soup.select("h1")[0].text
@@ -80,7 +82,7 @@ class LeSoir(Crawler):
             content_html = soup.select("r-article--section")[0]
 
         img_src = content_html.find("figure").find("img").attrs["src"]
-        img = base_url + img_src
+        img = self.base_url() + img_src
 
         for p in content_html.find_all("p"):
             # try:

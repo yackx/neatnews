@@ -4,8 +4,6 @@ from bs4 import BeautifulSoup
 from crawlers.crawler import Crawler
 from models import Headline, Article
 
-base_url = "https://lalibre.be"
-
 
 class LaLibre(Crawler):
     @staticmethod
@@ -16,9 +14,13 @@ class LaLibre(Crawler):
     def name() -> str:
         return "La Libre"
 
+    @staticmethod
+    def base_url() -> str:
+        return "https://lalibre.be"
+
     def fetch_headlines(self) -> [Headline]:
         headlines = []
-        html = requests.get(base_url).text
+        html = requests.get(self.base_url()).text
         soup = BeautifulSoup(html, "html.parser")
 
         for story_li_html in soup.select(".ap-StoryList-li"):
@@ -29,7 +31,7 @@ class LaLibre(Crawler):
                 else:
                     category = "n/a"
                 href = story_li_html.select("a")[0].attrs["href"]
-                url = base_url + href
+                url = self.base_url() + href
                 internal_url = f"lalibre{href}"
                 headline = Headline(title=title, category=category, url=url, internal_url=internal_url, paywall=False)
                 headlines.append(headline)
@@ -39,7 +41,7 @@ class LaLibre(Crawler):
         return headlines
 
     def fetch_article(self, path: str) -> Article:
-        url = base_url + "/" + path
+        url = self.base_url() + "/" + path
         html = requests.get(url, headers={"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}).text
         soup = BeautifulSoup(html, "html.parser")
         ap_story = soup.select(".ap-Story")[0]

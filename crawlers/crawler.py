@@ -14,6 +14,11 @@ class Crawler(ABC):
     def name() -> str:
         pass
 
+    @staticmethod
+    @abstractmethod
+    def base_url() -> str:
+        pass
+
     @abstractmethod
     def fetch_headlines(self) -> [Headline]:
         pass
