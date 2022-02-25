@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+from crawlers import google_bot_user_agent_header
 from crawlers.crawler import Crawler
 from models import Headline, Article
 
@@ -20,7 +21,7 @@ class LaLibre(Crawler):
 
     def fetch_headlines(self) -> [Headline]:
         headlines = []
-        html = requests.get(self.base_url()).text
+        html = requests.get(self.base_url(), headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
 
         for story_li_html in soup.select(".ap-StoryList-li"):
@@ -42,7 +43,7 @@ class LaLibre(Crawler):
 
     def fetch_article(self, path: str) -> Article:
         url = self.base_url() + "/" + path
-        html = requests.get(url, headers={"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}).text
+        html = requests.get(url, headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
         ap_story = soup.select(".ap-Story")[0]
         title = ap_story.find("h1").text

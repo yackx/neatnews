@@ -4,6 +4,7 @@ import requests
 from bs4 import BeautifulSoup
 from bs4.element import Comment
 
+from crawlers import google_bot_user_agent_header
 from crawlers.crawler import Crawler
 from models import Headline, Article
 
@@ -36,7 +37,7 @@ class LeSoir(Crawler):
             return articles_in_panel
 
         articles = []
-        html = requests.get(self.base_url()).text
+        html = requests.get(self.base_url(), headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
         category = None
 
@@ -68,7 +69,7 @@ class LeSoir(Crawler):
 
     def fetch_article(self, path: str) -> Article:
         url = self.base_url() + "/" + path
-        html = requests.get(url, headers={"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}).text
+        html = requests.get(url, headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
         title = soup.select("h1")[0].text
         summary = soup.select("r-article--chapo p")[0].text

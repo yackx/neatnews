@@ -38,3 +38,7 @@ def crawler_by_code(code: str) -> Crawler | None:
 
 def newspapers_by_code() -> {str: str}:
     return {c.code(): c.name() for c in Crawler.__subclasses__()}
+
+
+def google_bot_user_agent_header() -> {str, str}:
+    return {"user-agent": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"}
