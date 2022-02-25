@@ -21,6 +21,17 @@ def split_headlines_in_categories(headlines: [Headline]) -> [str, [Headline]]:
     return split
 
 
+@app.get("/{newspaper}/{path:path}", response_class=HTMLResponse)
+async def article(newspaper: str, path: str, request: Request,):
+    crawler = crawler_by_code(newspaper)
+    article = crawler.fetch_article(path)
+    return templates.TemplateResponse("article.html", {
+        "request": request,
+        "article": article,
+        "newspapers": newspapers_by_code(),
+    })
+
+
 @app.get("/{newspaper}", response_class=HTMLResponse, name="newspaper")
 async def headlines(newspaper: str, request: Request):
     crawler = crawler_by_code(newspaper)
@@ -30,17 +41,6 @@ async def headlines(newspaper: str, request: Request):
         "request": request,
         "headlines_in_categories": headlines_in_categories,
         "newspaper": crawler.name(),
-        "newspapers": newspapers_by_code(),
-    })
-
-
-@app.get("/{newspaper}/{path:path}", response_class=HTMLResponse)
-async def article(newspaper: str, path: str, request: Request,):
-    crawler = crawler_by_code(newspaper)
-    article = crawler.fetch_article(path)
-    return templates.TemplateResponse("article.html", {
-        "request": request,
-        "article": article,
         "newspapers": newspapers_by_code(),
     })
 
