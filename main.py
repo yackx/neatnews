@@ -29,6 +29,7 @@ async def headlines(newspaper: str, request: Request):
     return templates.TemplateResponse("index.html", {
         "request": request,
         "headlines_in_categories": headlines_in_categories,
+        "newspaper": crawler.name(),
         "newspapers": newspapers_by_code(),
     })
 
