@@ -45,7 +45,10 @@ class LaLibre(Crawler):
         ap_story = soup.select(".ap-Story")[0]
         title = ap_story.find("h1").text
         summary = ap_story.find("h2").text
-        img = ap_story.find("img").attrs["src"]
+        try:
+            img = ap_story.find("img").attrs["src"]
+        except AttributeError:
+            img = None
 
         paragraphs = []
         content_html = soup.select("#article-text")[0]

@@ -9,7 +9,9 @@
             </div>
             <h1>{{article.title}}</h1>
             <h3>{{article.summary}}</h3>
+            {% if article.img %}
             <img src="{{article.img}}"/>
+            {% endif %}
             <div id="content">
             {% for p in article.paragraphs %}
                 <p>{{p}}</p>
