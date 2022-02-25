@@ -11,7 +11,8 @@ base_url = "https://lesoir.be"
 
 
 class LeSoir(Crawler):
-    def code(self):
+    @staticmethod
+    def code():
         return "lesoir"
 
     def fetch_headlines(self) -> [Headline]:
