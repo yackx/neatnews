@@ -2,7 +2,7 @@ body {
     font-family: SansSerif, sans-serif;
 }
 
-#center {
+.center-container {
     margin: auto;
     width: 100%;
     max-width: 768px;
@@ -13,6 +13,8 @@ body {
     text-align: center;
     margin-bottom: 1em;
 }
+
+{% Headlines %}
 
 ul.headline {
     list-style-type: none;
@@ -26,4 +28,18 @@ ul.headline li a {
 
 ul.headline li a:link {
     color: #444;
+}
+
+{% Article %}
+
+#article #content p {
+    line-height: 1.2em;
+}
+
+#article h3 {
+    line-height: 1.2em;
+}
+
+#article img {
+    width: 768px;
 }
