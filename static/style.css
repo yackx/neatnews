@@ -55,5 +55,8 @@ ul.headline li a:link {
 }
 
 #article img {
-    width: 768px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
 }
