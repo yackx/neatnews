@@ -1,5 +1,6 @@
 body {
-    font-family: SansSerif, sans-serif;
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 1.1em;
 }
 
 .center-container {
@@ -7,6 +8,7 @@ body {
     width: 100%;
     max-width: 768px;
     padding: 10px;
+    background-color: #f6f6ef;
 }
 
 #newspapers {
@@ -15,6 +17,14 @@ body {
 }
 
 {% Headlines %}
+
+#headlines h2 {
+    padding-top: 0.4em;
+}
+
+#headlines ul li {
+    line-height: 1.4em;
+}
 
 ul.headline {
     list-style-type: none;
@@ -33,7 +43,7 @@ ul.headline li a:link {
 {% Article %}
 
 #article #content p {
-    line-height: 1.2em;
+    line-height: 1.4em;
 }
 
 #article h3 {
