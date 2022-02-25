@@ -28,6 +28,7 @@ body {
 
 #headlines ul li {
     line-height: 1.4em;
+    margin-bottom: 0.4em;
 }
 
 ul.headline {
@@ -42,6 +43,10 @@ ul.headline li a {
 
 ul.headline li a:link {
     color: #444;
+}
+
+ul.headline li a:hover {
+    text-decoration: underline;
 }
 
 {% Article %}
