@@ -1,3 +1,7 @@
+"""
+Quick experiment without running the server
+"""
+
 if __name__ == '__main__':
     from crawlers.lalibre import LaLibre
     crawler = LaLibre()
