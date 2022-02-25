@@ -3,8 +3,8 @@ Quick experiment without running the server
 """
 
 if __name__ == '__main__':
-    from crawlers.lalibre import LaLibre
-    crawler = LaLibre()
+    from crawlers.levif import LeVif
+    crawler = LeVif()
     headlines = crawler.fetch_headlines()
     for headline in headlines:
         print(f"{headline.title} [{headline.category}]")

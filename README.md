@@ -6,6 +6,7 @@ Currently supported:
 
 - [Le Soir](https://lesoir.be)
 - [La Libre](https://lalibre.be)
+- [Le Vif](https://levif.be)
 
 This project is provided for educational and personal use.
 
