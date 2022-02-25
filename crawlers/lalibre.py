@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from bs4.element import Comment
 
 from crawlers.crawler import Crawler
 from models import Headline, Article
