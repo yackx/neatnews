@@ -6,7 +6,12 @@ from models import Headline, Article
 class Crawler(ABC):
     @staticmethod
     @abstractmethod
-    def code():
+    def code() -> str:
+        pass
+
+    @staticmethod
+    @abstractmethod
+    def name() -> str:
         pass
 
     @abstractmethod
@@ -24,3 +29,7 @@ def crawler_by_code(code: str) -> Crawler | None:
             return crawler_class()
 
     return None
+
+
+def newspapers_by_code() -> {str: str}:
+    return {c.code(): c.name() for c in Crawler.__subclasses__()}

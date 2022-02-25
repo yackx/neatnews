@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
 
-from crawlers import crawler_by_code
+from crawlers import crawler_by_code, newspapers_by_code
 from models import Headline
 
 app = FastAPI()
@@ -21,10 +21,6 @@ def split_headlines_in_categories(headlines: [Headline]) -> [str, [Headline]]:
     return split
 
 
-def newspapers() -> {str, str}:
-    return {"lesoir": "Le Soir"}
-
-
 @app.get("/{newspaper}", response_class=HTMLResponse, name="newspaper")
 async def headlines(newspaper: str, request: Request):
     crawler = crawler_by_code(newspaper)
@@ -33,7 +29,7 @@ async def headlines(newspaper: str, request: Request):
     return templates.TemplateResponse("index.html", {
         "request": request,
         "headlines_in_categories": headlines_in_categories,
-        "newspapers": newspapers(),
+        "newspapers": newspapers_by_code(),
     })
 
 
@@ -44,7 +40,7 @@ async def article(newspaper: str, path: str, request: Request,):
     return templates.TemplateResponse("article.html", {
         "request": request,
         "article": article,
-        "newspapers": newspapers(),
+        "newspapers": newspapers_by_code(),
     })
 
 

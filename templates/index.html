@@ -3,6 +3,7 @@
     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
     <body>
         <div id="headlines" class="center-container">
+            <h1>{{newspaper}}</h1>
             {% include "newspaper_bar.html" %}
             {% for entry in headlines_in_categories %}
             <h2>{{entry[0]}}</h2>
