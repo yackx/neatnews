@@ -4,8 +4,8 @@
     <body>
         <div id="headlines" class="center-container">
             {% include "newspaper_bar.html" %}
-            <h1>{{newspaper.name}}</h1>
             <div><a href="{{newspaper.url}}" target="_blank">Go to website</a> ↗️</div>
+            <h1>{{newspaper.name}}</h1>
             {% for entry in headlines_in_categories %}
             <h2>{{entry[0]}}</h2>
             <ul class="headline">
