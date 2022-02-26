@@ -1,5 +1,5 @@
 body {
-    font-family: Times, "Times New Roman", serif;
+    font-family: Verdana, Geneva, sans-serif;
     font-size: 1.1em;
 }
 
@@ -55,7 +55,12 @@ ul.headline li a:hover {
     line-height: 1.4em;
 }
 
+#article h1 {
+    font-family: Times, "Times New Roman", serif;
+}
+
 #article h3 {
+    font-family: Times, "Times New Roman", serif;
     line-height: 1.2em;
 }
 
@@ -64,4 +69,8 @@ ul.headline li a:hover {
     margin-left: auto;
     margin-right: auto;
     width: 400px;
+}
+
+#content {
+    font-family: Times, "Times New Roman", serif;
 }
