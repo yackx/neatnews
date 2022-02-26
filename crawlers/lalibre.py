@@ -24,14 +24,14 @@ class LaLibre(Crawler):
         html = requests.get(self.base_url(), headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
 
-        for story_li_html in soup.select(".ap-StoryList-li"):
+        for story_item_html in soup.select(".ap-StoryList-itemLink"):
             try:
-                title = story_li_html.select("h2")[0].text
-                if category_html := story_li_html.select(".ap-StoryListTags-item"):
+                title = story_item_html.select("h2")[0].text
+                if category_html := story_item_html.select(".ap-StoryListTags-item"):
                     category = category_html[0].text
                 else:
                     category = "Divers"
-                href = story_li_html.select("a")[0].attrs["href"]
+                href = story_item_html.attrs["href"]
                 url = self.base_url() + href
                 internal_url = f"lalibre{href}"
                 headline = Headline(title=title, category=category, url=url, internal_url=internal_url, paywall=False)
