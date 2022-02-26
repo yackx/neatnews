@@ -28,6 +28,10 @@ async def article(newspaper: str, path: str, request: Request,):
     return templates.TemplateResponse("article.html", {
         "request": request,
         "article": article,
+        "newspaper": {
+            "name": crawler.name(),
+            "url": crawler.base_url(),
+        },
         "newspapers": newspapers_by_code(),
     })
 
