@@ -37,6 +37,12 @@ $ source venv/bin/activate
 
 Deployment files for Heroku are included in the project. Refer to Heroku documentation to deploy the project to a private instance.
 
+## Caveats
+
+This is a "scratch your own itch" project intended for personal use. The source code is provided for educational purpose.
+
+Some headlines may be missing. Some fragments like links to Twitter are not supported. Video and images are not supported by design.
+
 ## License
 
 Licensed under GNU General Public License v3
