@@ -4,20 +4,24 @@
     <title>neatnews - News without the hassle</title>
     <body>
         <div id="headlines" class="center-container">
-            {% include "newspaper_bar.html" %}
-            <div><a href="{{newspaper.url}}" target="_blank">Go to {{newspaper.name}}</a> ↗️</div>
-            <h1>{{newspaper.name}}</h1>
-            {% for entry in headlines_in_categories %}
-            <h2>{{entry[0]}}</h2>
-            <ul class="headline">
-                {% for headline in entry[1] %}
-                    <li>
-                        <a href="{{headline.internal_url}}">{{headline.title}}</a>
-                        {% if headline.paywall %}🔒{% endif %}
-                    </li>
+            <header>
+                {% include "newspaper_bar.html" %}
+                <div><a href="{{newspaper.url}}" target="_blank">Go to {{newspaper.name}}</a> ↗️</div>
+            <header>
+            <main>
+                <h1>{{newspaper.name}}</h1>
+                {% for entry in headlines_in_categories %}
+                <h2>{{entry[0]}}</h2>
+                <ul class="headline">
+                    {% for headline in entry[1] %}
+                        <li>
+                            <a href="{{headline.internal_url}}">{{headline.title}}</a>
+                            {% if headline.paywall %}🔒{% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
                 {% endfor %}
-                </ul>
-            {% endfor %}
+            </main>
         </div>
     </body>
 </html>

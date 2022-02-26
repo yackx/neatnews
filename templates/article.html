@@ -4,21 +4,24 @@
     <title>{{newspaper.name}} - {{article.title}}</title>
     <body>
         <div id="article" class="center-container">
-            {% include "newspaper_bar.html" %}
-            <div>
-                <a href="{{article.url}}" target="_blank">Original on {{newspaper.name}}</a> ↗️
-            </div>
-            <h1>{{article.title}}</h1>
-            <h3>{{article.summary}}</h3>
-            {% if article.img %}
-            <img src="{{article.img}}"/>
-            {% endif %}
-            <div id="content">
-            {% for p in article.paragraphs %}
-                <p>{{p}}</p>
-            {% endfor %}
-
-            </div>
+            <header>
+                {% include "newspaper_bar.html" %}
+                <div>
+                    <a href="{{article.url}}" target="_blank">Original on {{newspaper.name}}</a> ↗️
+                </div>
+            </header>
+            <article>
+                <h1>{{article.title}}</h1>
+                <h3>{{article.summary}}</h3>
+                {% if article.img %}
+                <img src="{{article.img}}"/>
+                {% endif %}
+                <div id="content">
+                {% for p in article.paragraphs %}
+                    <p>{{p}}</p>
+                {% endfor %}
+                </div>
+            </article>
         </div>
     </body>
 </html>
