@@ -30,7 +30,7 @@ class LaLibre(Crawler):
                 if category_html := story_li_html.select(".ap-StoryListTags-item"):
                     category = category_html[0].text
                 else:
-                    category = "n/a"
+                    category = "Divers"
                 href = story_li_html.select("a")[0].attrs["href"]
                 url = self.base_url() + href
                 internal_url = f"lalibre{href}"
