@@ -49,6 +49,7 @@ async def headlines(newspaper: str, request: Request):
             "url": crawler.base_url(),
         },
         "newspapers": newspapers_by_code(),
+        "selected_newspaper": newspaper,
     })
 
 
