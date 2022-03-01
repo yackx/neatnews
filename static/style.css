@@ -33,21 +33,21 @@ body {
     margin-bottom: 0.4em;
 }
 
-ul.headline {
+.headline {
     list-style-type: none;
     padding: 0;
     text-decoration: none;
 }
 
-ul.headline li a {
+.headline li a {
     text-decoration: none;
 }
 
-ul.headline li a:link {
+.headline li a:link {
     color: #444;
 }
 
-ul.headline li a:hover {
+.headline li a:hover {
     text-decoration: underline;
 }
 
