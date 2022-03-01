@@ -20,10 +20,6 @@ body {
 
 {% Headlines %}
 
-#headlines h1 {
-    text-align: center;
-}
-
 #headlines h2 {
     padding-top: 0.4em;
 }
