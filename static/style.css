@@ -20,19 +20,19 @@ body {
 
 {% Headlines %}
 
-#headlines h2 {
+#headlines .news-category {
     padding-top: 0.4em;
-}
-
-#headlines ul li {
-    line-height: 1.4em;
-    margin-bottom: 0.4em;
 }
 
 .headline {
     list-style-type: none;
     padding: 0;
     text-decoration: none;
+}
+
+.headline li {
+    line-height: 1.4em;
+    margin-bottom: 0.4em;
 }
 
 .headline li a {
