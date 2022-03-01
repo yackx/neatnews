@@ -33,6 +33,7 @@ async def article(newspaper: str, path: str, request: Request,):
             "url": crawler.base_url(),
         },
         "newspapers": newspapers_by_code(),
+        "selected_newspaper": newspaper,
     })
 
 
