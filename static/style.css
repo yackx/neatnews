@@ -7,6 +7,8 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 768px;
+    margin: 0 auto;
     padding: 0 1em 1em 1em;
     background-color: #f6f6ef;
 }
