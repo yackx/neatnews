@@ -11,9 +11,11 @@ body {
     background-color: #f6f6ef;
 }
 
-#newspapers {
-    text-align: center;
-    margin-bottom: 1em;
+#newspapers ul {
+    display: flex;
+    justify-content: center;
+    gap: 0.5em;
+    list-style: none;
 }
 
 {% Headlines %}

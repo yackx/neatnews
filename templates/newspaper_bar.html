@@ -1,7 +1,7 @@
-            <div id="newspapers">
-<!--                <span>[</span>-->
-                {% for link, name in newspapers.items() %}
-                [<a href="/{{link}}">{{name}}</a>]
-                {% endfor %}
-<!--                <span>]</span>-->
-            </div>
+            <nav id="newspapers">
+                <ul>
+                    {% for link, name in newspapers.items() %}
+                    <li>[<a href="/{{link}}">{{name}}</a>]</li>
+                    {% endfor %}
+                </ul>
+            </nav>
