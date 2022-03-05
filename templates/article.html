@@ -19,7 +19,11 @@
                 {% endif %}
                 <div id="content">
                 {% for p in article.paragraphs %}
+                    {% if p is string %}
                     <p>{{p}}</p>
+                    {% else %}
+                    ↗️ <a href="{{p[0]}}" target="_blank">{{p[1]}}</a>
+                    {% endif %}
                 {% endfor %}
                 </div>
             </article>
