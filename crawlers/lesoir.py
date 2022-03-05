@@ -25,12 +25,15 @@ class LeSoir(Crawler):
     def fetch_headlines(self) -> [Headline]:
 
         def parse_panel_fragment(selector):
+            ext_urls = ["sosoir.lesoir.be", "clubdusoir.lesoir.be", "geeko.lesoir.be"]
             articles_in_panel = []
             for article_fragment in panel_fragment.select(selector):
-                title = article_fragment.text.strip().replace("\n", " - ")
                 href = article_fragment.attrs["href"]
+                if any(url for url in ext_urls if url in href):
+                    continue
                 internal_url = f"lesoir{href}"
                 url = f"{self.base_url()}{href}"
+                title = article_fragment.text.strip().replace("\n", " - ")
                 paywall = len(article_fragment.select(".r-icon--lesoir")) > 0
                 article = Headline(title, str(category), url, internal_url, paywall)
                 articles_in_panel.append(article)
