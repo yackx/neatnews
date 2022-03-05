@@ -81,7 +81,6 @@ class LeSoir(Crawler):
 
         try:
             content_html = soup.select("article")[0]
-
         except IndexError:
             content_html = soup.select("r-article--section")[0]
 
@@ -89,14 +88,15 @@ class LeSoir(Crawler):
         img = self.base_url() + img_src
 
         for p in content_html.find_all("p"):
-            # try:
-            #     twitter = soup.select(".twitter-tweet")[0]  # .select("a")[0].text
-            #     paragraphs.append(f"Twitter: {twitter}")
-            # except IndexError:
-            #     pass
-
-            if not any(type(e) == Comment and str(e).strip().startswith("scald") for e in p.descendants):
-                # if not any(e for e in content_html.find_all("p")[15].descendants if type(e) == Comment):
+            if twitter_select := p.select("script"):
+                # bs4 with html.parser does not expose the content of `scripts`
+                # so we resort to regex
+                try:
+                    t = re.search('"https://twitter.com/(.*?)"', twitter_select[0].text).group(0).strip('"')
+                    paragraphs.append((t, "Twitter"))
+                except AttributeError:
+                    pass
+            elif not any(type(e) == Comment and str(e).strip().startswith("scald") for e in p.descendants):
                 content = p.text.strip().strip("\n")
                 if content:
                     paragraphs.append(p.text)
