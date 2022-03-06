@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Union, Tuple
 
 
 @dataclass
@@ -16,7 +17,7 @@ class Article:
     summary: str
     img: str
     url: str
-    paragraphs: [str]
+    paragraphs: [Union[str, Tuple[str, str]]]  # str=text, (str, str)=url,text
     published_on: str = None
     updated_on: str = None
     see_also: [str] = field(default_factory=list)
