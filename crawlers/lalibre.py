@@ -1,3 +1,5 @@
+import re
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -48,9 +50,13 @@ class LaLibre(Crawler):
         ap_story = soup.select(".ap-Story")[0]
         title = ap_story.find("h1").text
         summary = ap_story.find("h2").text
+
         try:
             img = ap_story.find("img").attrs["src"]
-        except AttributeError:
+            if img.startswith("data:image"):  # it is not an image, probably a video
+                crappy_style = ap_story.select(".ap-Print-bgImage")[0].attrs["style"]
+                img = re.search(r"https://www.lalibre.be/resizer/(.*?)\.jpg", crappy_style).group(0)
+        except (AttributeError, IndexError):
             img = None
 
         paragraphs = []
