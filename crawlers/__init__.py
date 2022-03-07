@@ -2,3 +2,4 @@ from .crawler import Crawler, crawler_by_code, newspapers_by_code, google_bot_us
 from .lesoir import LeSoir
 from .lalibre import LaLibre
 from .levif import LeVif
+from .rtbf import Rtbf
