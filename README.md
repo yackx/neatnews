@@ -7,6 +7,7 @@ Currently supported:
 - [Le Soir](https://lesoir.be)
 - [La Libre](https://lalibre.be)
 - [Le Vif](https://levif.be)
+- [rtbf](https://rtbf.be)
 
 This project is provided for educational and personal use.
 
