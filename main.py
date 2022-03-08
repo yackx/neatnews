@@ -2,7 +2,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from starlette.responses import RedirectResponse
+from starlette.responses import FileResponse, RedirectResponse
 
 from crawlers import crawler_by_code, newspapers_by_code
 from models import Headline
@@ -52,6 +52,11 @@ async def headlines(newspaper: str, request: Request):
         "newspapers": newspapers_by_code(),
         "selected_newspaper": newspaper,
     })
+
+
+@app.get("/favicon.ico")
+async def favicon():
+    return FileResponse("static/favicon.ico")
 
 
 @app.get("/")
