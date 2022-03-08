@@ -9,7 +9,7 @@
             <header>
                 {% include "newspaper_bar.html" %}
                 <div><a href="{{newspaper.url}}" target="_blank">Go to {{newspaper.name}}</a> ↗️</div>
-            <header>
+            </header>
             <main>
                 {% for entry in headlines_in_categories %}
                 <h2 class="news-category">{{entry[0]}}</h2>
