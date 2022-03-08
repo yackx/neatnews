@@ -46,3 +46,5 @@ Some headlines may be missing. Some fragments like links to Twitter are not supp
 ## License
 
 Licensed under GNU General Public License v3
+
+[Favicon](static/favicon.ico) by [twemoji](https://twemoji.twitter.com/) / [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)

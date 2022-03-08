@@ -4,12 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{{ url_for('static', path='/style.css') }}" rel="stylesheet">
     <title>neatnews - News without the hassle</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
     <body>
         <div id="headlines" class="center-container">
             <header>
                 {% include "newspaper_bar.html" %}
                 <div><a href="{{newspaper.url}}" target="_blank">Go to {{newspaper.name}}</a> ↗️</div>
-            <header>
+            </header>
             <main>
                 {% for entry in headlines_in_categories %}
                 <h2 class="news-category">{{entry[0]}}</h2>
