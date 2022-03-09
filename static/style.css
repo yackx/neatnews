@@ -14,7 +14,9 @@ body {
 }
 
 #newspapers ul {
+    padding: 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     gap: 0.5em;
     list-style: none;
