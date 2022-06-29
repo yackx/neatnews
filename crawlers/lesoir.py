@@ -29,6 +29,8 @@ class LeSoir(Crawler):
             articles_in_panel = []
             for article_fragment in panel_fragment.select(selector):
                 href = article_fragment.attrs["href"]
+                if href.startswith("https"):
+                    continue  # crap
                 if any(url for url in excluded_domains if url in href):
                     continue
                 internal_url = f"lesoir{href}"
