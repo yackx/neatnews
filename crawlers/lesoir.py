@@ -25,11 +25,11 @@ class LeSoir(Crawler):
     def fetch_headlines(self) -> [Headline]:
 
         def parse_panel_fragment(selector):
-            ext_urls = ["sosoir.lesoir.be", "clubdusoir.lesoir.be", "geeko.lesoir.be"]
+            excluded_domains = ["sosoir.lesoir.be", "clubdusoir.lesoir.be", "geeko.lesoir.be"]
             articles_in_panel = []
             for article_fragment in panel_fragment.select(selector):
                 href = article_fragment.attrs["href"]
-                if any(url for url in ext_urls if url in href):
+                if any(url for url in excluded_domains if url in href):
                     continue
                 internal_url = f"lesoir{href}"
                 url = f"{self.base_url()}{href}"
