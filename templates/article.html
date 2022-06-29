@@ -13,7 +13,9 @@
             </header>
             <article>
                 <h1>{{article.title}}</h1>
+                {% if article.summary is not none %}
                 <h3>{{article.summary}}</h3>
+                {% endif %}
                 {% if article.img %}
                 <img src="{{article.img}}"/>
                 {% endif %}
