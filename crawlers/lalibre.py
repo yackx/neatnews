@@ -56,10 +56,9 @@ class LaLibre(Crawler):
             summary = None
 
         try:
-            img = ap_story.find("img").attrs["src"]
-            if img.startswith("data:image"):  # it is not an image, probably a video
-                crappy_style = ap_story.select(".ap-Print-bgImage")[0].attrs["style"]
-                img = re.search(r"https://www.lalibre.be/resizer/(.*?)\.jpg", crappy_style).group(0)
+            images = [i.attrs["src"] for i in ap_story.select("img")]
+            images = [i for i in images if not i.startswith("data:image")]
+            img = images[-1]
         except (AttributeError, IndexError):
             img = None
 
