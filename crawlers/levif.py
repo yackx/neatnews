@@ -38,7 +38,7 @@ class LeVif(Crawler):
             except IndexError:
                 continue
 
-        return headlines
+        return list(dict.fromkeys(headlines))
 
     def fetch_article(self, path: str) -> Article:
         url = self.base_url() + "/" + path

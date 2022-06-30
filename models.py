@@ -10,6 +10,14 @@ class Headline:
     internal_url: str
     paywall: bool | None
 
+    def __eq__(self, o: object) -> bool:
+        if isinstance(o, Headline):
+            return self.url == o.url and self.category == o.category
+        raise NotImplementedError("Attempt to compare with non Headline")
+
+    def __hash__(self) -> int:
+        return hash(tuple(sorted(self.__dict__.items())))
+
 
 @dataclass
 class Article:

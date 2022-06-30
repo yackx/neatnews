@@ -41,36 +41,38 @@ class LeSoir(Crawler):
                 articles_in_panel.append(article)
             return articles_in_panel
 
-        articles = []
+        headlines = []
         html = requests.get(self.base_url(), headers=google_bot_user_agent_header()).text
         soup = BeautifulSoup(html, "html.parser")
         category = None
 
         for panel_fragment in soup.find_all("r-main", id=re.compile("^main")):
             category = "A la Une"
-            articles_in_link_fragment = parse_panel_fragment(".r-article--link")
-            articles.extend(articles_in_link_fragment)
+            headlines_in_link_fragment = parse_panel_fragment(".r-article--link")
+            headlines.extend(headlines_in_link_fragment)
 
         for panel_fragment in soup.find_all("r-mini-panel", id=re.compile("^panel")):
             try:
                 category = panel_fragment.select(".r-mini-panel--title")[0].attrs["data-label"]
-                articles_in_link_fragment = parse_panel_fragment(".r-article--link")
-                if len(articles_in_link_fragment) == 0:  # Panel "Opinions"
-                    articles_in_link_fragment = parse_panel_fragment(".r-panel--link")
-                articles.extend(articles_in_link_fragment)
+                headlines_in_link_fragment = parse_panel_fragment(".r-article--link")
+                if len(headlines_in_link_fragment) == 0:  # Panel "Opinions"
+                    headlines_in_link_fragment = parse_panel_fragment(".r-panel--link")
+                headlines.extend(headlines_in_link_fragment)
             except IndexError:
                 pass
 
-        # Dedup articles in "A la Une" category - this category is flooded with duplicates
-        for i, article in enumerate([a for a in articles if a.category == "A la Une"]):
+        # Dedup articles in "A la Une" category
+        # - this category is flooded with duplicates appearing elsewhere
+        for i, article in enumerate([a for a in headlines if a.category == "A la Une"]):
             if i > 5:  # Make sure important articles appear even if duped
                 try:
-                    next(a for a in articles if a.url == article.url and a.category != "A la Une")
-                    articles.remove(article)
+                    next(a for a in headlines if a.url == article.url and a.category != "A la Une")
+                    headlines.remove(article)
                 except StopIteration:
                     pass
 
-        return articles
+        return list(dict.fromkeys(headlines))
+
 
     def fetch_article(self, path: str) -> Article:
         url = self.base_url() + "/" + path
